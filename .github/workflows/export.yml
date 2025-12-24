@@ -1,0 +1,41 @@
+name: Export menu
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install deps
+        run: pip install -r requirements.txt
+
+      - name: Write Google creds file
+        run: |
+          echo '${{ secrets.GOOGLE_CREDS_JSON }}' > service_account.json
+
+      - name: Export menu
+        env:
+          SHEET_ID: ${{ secrets.SHEET_ID }}
+          TAB_NAME: Menu
+          GOOGLE_CREDS: service_account.json
+          OUT_DIR: .
+        run: python export_menu.py
+
+      - name: Commit updates
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Update latest.json"
