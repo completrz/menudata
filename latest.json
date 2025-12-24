@@ -1,0 +1,48 @@
+{
+  "generated_at": "2025-12-24T22:32:51.809268+00:00",
+  "categories": [
+    {
+      "name": "Burgers",
+      "sort": 10.0,
+      "items": [
+        {
+          "name": "Classic Burger",
+          "description": "American cheese, lettuce, tomato",
+          "price_display": "12.99",
+          "image_url": ""
+        },
+        {
+          "name": "Double Burger",
+          "description": "Two patties, pickles, special sauce",
+          "price_display": "15.99",
+          "image_url": ""
+        }
+      ]
+    },
+    {
+      "name": "Drinks",
+      "sort": 10.0,
+      "items": [
+        {
+          "name": "Soda",
+          "description": "Coke / Diet / Sprite",
+          "price_display": "2.5",
+          "image_url": ""
+        }
+      ]
+    },
+    {
+      "name": "Sides",
+      "sort": 10.0,
+      "items": [
+        {
+          "name": "Fries",
+          "description": "Crispy salted fries",
+          "price_display": "4.5",
+          "image_url": ""
+        }
+      ]
+    }
+  ],
+  "hash": "5d2de7405b47e670d36b03bac12d2eaa679fc91930379915361abe74338f502a"
+}
