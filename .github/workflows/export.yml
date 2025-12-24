@@ -24,16 +24,23 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Write Google creds file
+        shell: bash
         run: |
-          echo '${{ secrets.GOOGLE_CREDS_JSON }}' > service_account.json
+          CREDS_PATH="$RUNNER_TEMP/service_account.json"
+          cat > "$CREDS_PATH" <<'EOF'
+          ${{ secrets.GOOGLE_CREDS_JSON }}
+          EOF
+          echo "CREDS_PATH=$CREDS_PATH" >> $GITHUB_ENV
+
 
       - name: Export menu
         env:
           SHEET_ID: ${{ secrets.SHEET_ID }}
           TAB_NAME: Menu
-          GOOGLE_CREDS: service_account.json
+          GOOGLE_CREDS: ${{ env.CREDS_PATH }}
           OUT_DIR: .
         run: python export_menu.py
+
 
       - name: Commit updates
         uses: stefanzweifel/git-auto-commit-action@v5
